@@ -6,7 +6,7 @@ return {
 		opts = {
 			editor = {
 				tooltip = "Kogasa's Neovim",
-				icon = "kogasa_editor"
+				icon = "https://raw.githubusercontent.com/DoormatIka/lazy-kogasa-nvim/refs/heads/main/assets/sleepykogasa.png"
 			},
 			display = {
 				flavor = "accent"
