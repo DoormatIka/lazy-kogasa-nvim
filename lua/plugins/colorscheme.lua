@@ -1,7 +1,8 @@
 
 return {
 	{
-		"morhetz/gruvbox",
-		lazy = false
+		"vague2k/vague.nvim",
+		lazy = false,
+		priority = 1000,
 	}
 }

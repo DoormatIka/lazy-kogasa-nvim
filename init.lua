@@ -14,6 +14,7 @@ set.number = true
 set.clipboard = ""
 set.cursorline = true
 set.cursorlineopt = "both"
+set.scrolloff = 10
 
 -- clipboard, only syncs with sys clipboard when you tab out
 api.nvim_create_autocmd("FocusGained", {
@@ -58,15 +59,17 @@ require("lazy").setup({
 })
 
 -- diagnostics
-
 vim.diagnostic.config(
     {
-        underline = false,
-        virtual_text = {
-            spacing = 2,
-        },
-        update_in_insert = false,
+        underline = true,
+        virtual_text = false,
+		virtual_lines = {
+			only_current_line = true,
+		},
         severity_sort = true,
+		float = {
+			border = "rounded"
+		},
         signs = {
             text = {
                 [vim.diagnostic.severity.ERROR] = "\u{2718}",
@@ -85,5 +88,18 @@ keyset("n", "<leader>m", function() vim.cmd("tabp") end, {})
 keyset("n", "<leader>x", function() vim.cmd("tabclose") end, {})
 keyset("n", "<leader>;", function() vim.cmd("Neotree position=float") end, {})
 keyset("n", "<leader>fw", function() vim.cmd("Telescope projects") end, {})
+-- terminal escape.
+keyset("t", "<Esc>", "<C-\\><C-n>")
+-- diagnostics
+api.nvim_create_user_command("Diagnostics", function()
+  vim.diagnostic.setqflist()
+  vim.cmd("copen 5")
+end, {})
+api.nvim_create_autocmd("DiagnosticChanged", {
+	callback = function()
+		vim.diagnostic.setqflist({ open = false })
+	end,
+})
 
-vim.cmd [[ colorscheme gruvbox ]]
+
+vim.cmd [[ colorscheme vague ]]
