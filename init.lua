@@ -45,6 +45,9 @@ global.clipboard = {
 	['cache_enabled'] = 0,
 }
 
+-- CLEAN CLRF NEWLINES WTF GIT :sob:
+vim.cmd([[command! CleanCLRF :%s/\r$//g]])
+
 -- plugins
 require("config.lazy")
 require("lazy").setup({
