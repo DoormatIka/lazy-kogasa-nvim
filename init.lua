@@ -90,7 +90,16 @@ keyset("n", "<leader>.", function() vim.cmd("tabn") end, {})
 keyset("n", "<leader>m", function() vim.cmd("tabp") end, {})
 keyset("n", "<leader>x", function() vim.cmd("tabclose") end, {})
 keyset("n", "<leader>;", function() vim.cmd("Neotree position=float") end, {})
+
+local builtin = require("telescope.builtin")
+keyset("n", "<leader>ff", builtin.find_files, {})
+keyset("n", "<leader>fg", builtin.live_grep,  {})
+keyset("n", "<leader>fb", builtin.buffers,    {})
+keyset("n", "<leader>fh", builtin.help_tags,  {})
 keyset("n", "<leader>fw", function() vim.cmd("Telescope projects") end, {})
+
+
+
 -- terminal escape.
 keyset("t", "<Esc>", "<C-\\><C-n>")
 -- diagnostics
@@ -98,11 +107,13 @@ api.nvim_create_user_command("Diagnostics", function()
   vim.diagnostic.setqflist()
   vim.cmd("copen 5")
 end, {})
+api.nvim_create_user_command("Format", function ()
+    require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
+end, {})
 api.nvim_create_autocmd("DiagnosticChanged", {
 	callback = function()
 		vim.diagnostic.setqflist({ open = false })
 	end,
 })
-
 
 vim.cmd [[ colorscheme vague ]]
