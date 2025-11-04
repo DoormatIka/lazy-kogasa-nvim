@@ -9,12 +9,17 @@ return {
 		"mason-org/mason-lspconfig.nvim", -- nvim-lspconfig to mason between layer
 		lazy = false,
 		opts = {
-			ensure_installed = { "lua_ls" },
+			ensure_installed = { "lua_ls", "ts_ls" },
 			handlers = {
 				function(server_name)
 					require("lspconfig")[server_name].setup {}
 				end,
 				["lua_ls"] = function() require("lsp.lua_ls") end,
+				["ts_ls"] = function ()
+					require("lspconfig").ts_ls.setup {
+						filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+					}
+				end
 			},
 		},
 		dependencies = {
@@ -45,11 +50,6 @@ return {
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
 		opts_extend = { "sources.default" }
-	},
-	{
-		"maan2003/lsp_lines.nvim", -- error formatter
-		lazy = false,
-		opts = {},
 	},
 }
 

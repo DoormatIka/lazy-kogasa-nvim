@@ -10,9 +10,9 @@ return {
 			require("nvim-treesitter.install").prefer_git = false
 			require("nvim-treesitter.install").compilers = { "clang" }
 			require("nvim-treesitter.configs").setup {
-				ensure_installed = { 
-					"lua", 
-					"vim", 
+				ensure_installed = {
+					"lua",
+					"vim",
 					"javascript",
 					"typescript",
 					"vimdoc",

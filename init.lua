@@ -11,6 +11,8 @@ set.shiftwidth = 4
 set.tabstop = 4
 set.expandtab = false
 set.number = true
+set.relativenumber = true
+set.signcolumn = "number"
 set.clipboard = ""
 set.cursorline = true
 set.cursorlineopt = "both"
@@ -66,12 +68,10 @@ vim.diagnostic.config(
     {
         underline = true,
         virtual_text = false,
-		virtual_lines = {
-			only_current_line = true,
-		},
         severity_sort = true,
 		float = {
-			border = "rounded"
+			border = "rounded",
+			source = "if_many",
 		},
         signs = {
             text = {
@@ -98,6 +98,8 @@ keyset("n", "<leader>fb", builtin.buffers,    {})
 keyset("n", "<leader>fh", builtin.help_tags,  {})
 keyset("n", "<leader>fw", function() vim.cmd("Telescope projects") end, {})
 
+keyset("n", "<leader>r", vim.lsp.buf.rename, {})
+keyset("n", "<leader>d", vim.lsp.buf.definition, {})
 
 
 -- terminal escape.
@@ -113,6 +115,23 @@ end, {})
 api.nvim_create_autocmd("DiagnosticChanged", {
 	callback = function()
 		vim.diagnostic.setqflist({ open = false })
+	end,
+})
+
+vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"},
+{
+	callback = function()
+		vim.diagnostic.open_float(nil, {
+			scope = "line",
+			close_events = {
+				"CursorMoved",
+				"CursorMovedI",
+				"BufHidden",
+				"InsertCharPre",
+				"WinLeave",
+      		},
+			focusable = false,
+		})
 	end,
 })
 
