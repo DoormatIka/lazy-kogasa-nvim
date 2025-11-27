@@ -1,3 +1,8 @@
+local file = "\u{ea7b}"
+local workspaces = "\u{ea83}"
+local recent = "\u{e641}"
+local quit = "\u{f00d}"
+
 return {
 	{
 		"goolord/alpha-nvim",
@@ -18,10 +23,10 @@ return {
 			dashboard.section.header.val = simple
 
 			dashboard.section.buttons.val = {
-				dashboard.button( "e", "?  > New file"  , ":ene <BAR> startinsert <CR>"),
-				dashboard.button( "w", "?  > Workspaces", ":Telescope projects<CR>"),
-				dashboard.button( "r", "?  > Recent"    , ":Telescope oldfiles<CR>"),
-				dashboard.button( "q", "?  > Quit NVIM" , ":qa<CR>"),
+				dashboard.button( "e", file .. "  > New file"  , ":ene <BAR> startinsert <CR>"),
+				dashboard.button( "w", workspaces .. "  > Workspaces", ":Telescope projects<CR>"),
+				dashboard.button( "r", recent .. "  > Recent", ":Telescope oldfiles<CR>"),
+				dashboard.button( "q", quit .. "  > Quit NVIM" , ":qa<CR>"),
 			}
 
 

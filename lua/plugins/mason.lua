@@ -17,9 +17,27 @@ return {
 				["lua_ls"] = function() require("lsp.lua_ls") end,
 				["ts_ls"] = function ()
 					require("lspconfig").ts_ls.setup {
-						filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+						single_file_support = true,
+						filetypes = {
+							"typescript",
+							"typescriptreact",
+							"javascript",
+							"javascriptreact",
+							"html",
+						},
 					}
-				end
+				end,
+				["html"] = function()
+					local capabilities = vim.lsp.protocol.make_client_capabilities()
+					capabilities.textDocument.completion.completionItem.snippetSupport = true
+					require("lspconfig").html.setup {
+						capabilities = capabilities,
+						init_options = {
+							configurationSection = { "html", "css", "javascript" },
+							embeddedLanguages = { css = true, javascript = true },
+						},
+					}
+				end,
 			},
 		},
 		dependencies = {

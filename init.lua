@@ -34,18 +34,19 @@ vim.wo.linebreak = false
 
 global.mapleader = ","
 set.pyxversion = 3
-global.clipboard = {
-	['name'] = 'WslClipboard',
-  	['copy'] = {
-    	["+"] = 'clip.exe',
-    	["*"] = 'clip.exe',
-  	},
-	['paste'] = {
-		['+'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).replace("`r", ""))',
-		['*'] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).replace("`r", ""))',
-	},
-	['cache_enabled'] = 0,
+vim.g.clipboard = {
+    name = "xclip",
+    copy = {
+        ["+"] = "xclip -selection clipboard",
+        ["*"] = "xclip -selection primary",
+    },
+    paste = {
+		["+"] = "xclip -selection clipboard -o",
+        ["*"] = "xclip -selection primary -o",
+    },
+    cache_enabled = 0,
 }
+
 
 -- CLEAN CLRF NEWLINES WTF GIT :sob:
 vim.cmd([[command! CleanCLRF :%s/\r$//g]])

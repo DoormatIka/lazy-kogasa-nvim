@@ -1,4 +1,24 @@
 
+local function parent_dir_filename()
+	local fullpath = vim.fn.expand("%:p")
+	if fullpath == "" then
+		return ""
+	end
+
+	local cwd = vim.fn.getcwd()
+	local relativepath = vim.fn.fnamemodify(fullpath, ":.")
+	local parts = vim.split(relativepath, "/", { plain = true })
+
+	-- #table = table.length() ????
+	if #parts >= 2 then
+		local parent = parts[#parts - 1]
+		local name = parts[#parts]
+		return "\u{ea83} " .. parent .. "/" .. name
+	else
+		return "\u{ea7b} " .. parts[#parts]
+	end
+end
+
 return {
 	{
 		"nvim-lualine/lualine.nvim",
@@ -45,7 +65,7 @@ return {
 			  },
 			  sections = {
 				lualine_a = {},
-				lualine_b = { 'filename', 'branch' },
+				lualine_b = { parent_dir_filename, 'branch' },
 				lualine_c = {
 				  '%=', --[[ add your center components here in place of this comment ]]
 				},
