@@ -102,6 +102,9 @@ keyset("n", "<leader>fw", function() vim.cmd("Telescope projects") end, {})
 keyset("n", "<leader>r", vim.lsp.buf.rename, {})
 keyset("n", "<leader>d", vim.lsp.buf.definition, {})
 
+-- move line up and down.
+keyset("n", "<A-Up>",   function () vim.cmd("m .-2") end, {})
+keyset("n", "<A-Down>", function () vim.cmd("m .+1") end, {})
 
 -- terminal escape.
 keyset("t", "<Esc>", "<C-\\><C-n>")
