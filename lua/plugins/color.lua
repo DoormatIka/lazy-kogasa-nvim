@@ -1,7 +1,6 @@
-
-local begin = '\u{1FBE7}'
-local ending = '\u{1FBE6}'
-local middle = '\u{1CD33}'
+local begin = "\u{1FBE7}"
+local ending = "\u{1FBE6}"
+local middle = "\u{1CD33}"
 
 return {
 	{
@@ -11,27 +10,27 @@ return {
 	},
 	{
 		"brenoprata10/nvim-highlight-colors",
-		config = function ()
+		config = function()
 			require("nvim-highlight-colors").setup({
 				---Render style
 				---@usage 'background'|'foreground'|'virtual'
-				render = 'virtual',
+				render = "virtual",
 
 				---Set virtual symbol (requires render to be set to 'virtual')
 				virtual_symbol = begin .. middle .. middle .. ending,
 
 				---Set virtual symbol suffix (defaults to '')
-				virtual_symbol_prefix = '',
+				virtual_symbol_prefix = "",
 
 				---Set virtual symbol suffix (defaults to ' ')
-				virtual_symbol_suffix = ' ',
+				virtual_symbol_suffix = " ",
 
 				---Set virtual symbol position()
 				---@usage 'inline'|'eol'|'eow'
 				---inline mimics VS Code style
 				---eol stands for `end of column` - Recommended to set `virtual_symbol_suffix = ''` when used.
 				---eow stands for `end of word` - Recommended to set `virtual_symbol_prefix = ' ' and virtual_symbol_suffix = ''` when used.
-				virtual_symbol_position = 'inline',
+				virtual_symbol_position = "inline",
 
 				---Highlight hex colors, e.g. '#FFFFFF'
 				enable_hex = true,
@@ -58,22 +57,22 @@ return {
 				enable_named_colors = true,
 
 				---Highlight tailwind colors, e.g. 'bg-blue-500'
-				enable_tailwind = false,
+				enable_tailwind = true,
 
 				---Set custom colors
 				---Label must be properly escaped with '%' to adhere to `string.gmatch`
 				--- :help string.gmatch
 				custom_colors = {
-					{ label = '%-%-theme%-primary%-color', color = '#0f1219' },
-					{ label = '%-%-theme%-secondary%-color', color = '#5a5d64' },
+					{ label = "%-%-theme%-primary%-color", color = "#0f1219" },
+					{ label = "%-%-theme%-secondary%-color", color = "#5a5d64" },
 				},
 
 				-- Exclude filetypes or buftypes from highlighting e.g. 'exclude_buftypes = {'text'}'
 				exclude_filetypes = {},
 				exclude_buftypes = {},
 				-- Exclude buffer from highlighting e.g. 'exclude_buffer = function(bufnr) return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1000000 end'
-				exclude_buffer = function(bufnr) end
+				exclude_buffer = function(bufnr) end,
 			})
-		end
-	}
+		end,
+	},
 }
