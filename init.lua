@@ -17,12 +17,18 @@ set.cursorline = true
 set.cursorlineopt = "both"
 set.scrolloff = 10
 
+local startup_augroup = vim.api.nvim_create_augroup("Startup", { clear = true })
+local clipboard_augroup = vim.api.nvim_create_augroup("Clipboard", { clear = true })
+local diagnostics_augroup = vim.api.nvim_create_augroup("Diagnostics", { clear = true })
+
 -- clipboard, only syncs with sys clipboard when you tab out
 api.nvim_create_autocmd("FocusGained", {
+	group = clipboard_augroup,
 	pattern = { "*" },
 	command = [[call setreg("@", getreg("+"))]],
 })
 api.nvim_create_autocmd("FocusLost", {
+	group = clipboard_augroup,
 	pattern = { "*" },
 	command = [[call setreg("+", getreg("@"))]],
 })
@@ -127,22 +133,31 @@ keyset("i", "<A-Down>", ":m .+1<CR>==gi", {})
 
 -- terminal escape.
 keyset("t", "<Esc>", "<C-\\><C-n>")
+
 -- diagnostics
 api.nvim_create_user_command("Diagnostics", function()
 	vim.diagnostic.setqflist()
 	vim.cmd("copen 5")
 end, {})
 
-api.nvim_create_user_command("Format", function()
-	require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
-end, {})
 api.nvim_create_autocmd("DiagnosticChanged", {
+	group = diagnostics_augroup,
 	callback = function()
 		vim.diagnostic.setqflist({ open = false })
 	end,
 })
 
+-- sessions
+api.nvim_create_autocmd("VimEnter", {
+	group = startup_augroup,
+	nested = true,
+	callback = function()
+		require("persistence").load({ last = true })
+	end,
+})
+
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+	group = diagnostics_augroup,
 	callback = function()
 		vim.diagnostic.open_float(nil, {
 			scope = "line",
@@ -157,5 +172,9 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 		})
 	end,
 })
+
+api.nvim_create_user_command("Format", function()
+	require("conform").format({ bufnr = vim.api.nvim_get_current_buf() })
+end, {})
 
 vim.cmd([[ colorscheme vague ]])
