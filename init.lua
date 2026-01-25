@@ -17,7 +17,6 @@ set.cursorline = true
 set.cursorlineopt = "both"
 set.scrolloff = 10
 
-local startup_augroup = vim.api.nvim_create_augroup("Startup", { clear = true })
 local clipboard_augroup = vim.api.nvim_create_augroup("Clipboard", { clear = true })
 local diagnostics_augroup = vim.api.nvim_create_augroup("Diagnostics", { clear = true })
 
@@ -147,14 +146,12 @@ api.nvim_create_autocmd("DiagnosticChanged", {
 	end,
 })
 
--- sessions
-api.nvim_create_autocmd("VimEnter", {
-	group = startup_augroup,
-	nested = true,
-	callback = function()
-		require("persistence").load({ last = true })
-	end,
-})
+keyset("n", "<leader>ac", function()
+	vim.lsp.buf.code_action()
+end, { desc = "Apply preferred code action" })
+keyset("n", "K", function()
+	require("pretty_hover").hover()
+end, { desc = "Apply preferred code action" })
 
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 	group = diagnostics_augroup,

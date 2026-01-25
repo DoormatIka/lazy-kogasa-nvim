@@ -7,6 +7,45 @@ return {
 		"vague2k/vague.nvim",
 		lazy = false,
 		priority = 1000,
+		opts = {
+			transparent = true,
+		},
+	},
+	{
+		"petertriho/nvim-scrollbar",
+		config = function()
+			require("scrollbar").setup()
+		end,
+	},
+	{
+		"sphamba/smear-cursor.nvim",
+		config = function()
+			require("smear_cursor").setup({
+				cursor_color = "#45d7ff",
+				particles_enabled = true,
+
+				stiffness = 0.5,
+				trailing_stiffness = 0.5,
+				matrix_pixel_threshold = 0.5,
+
+				trailing_exponent = 1,
+				damping = 0.6,
+				gradient_exponent = 0.5,
+				gamma = 1,
+				never_draw_over_target = true,
+				hide_target_hack = true,
+				particle_spread = 1,
+				particles_per_second = 500,
+				particles_per_length = 50,
+				particle_max_lifetime = 800,
+				particle_max_initial_velocity = 20,
+				particle_velocity_from_cursor = 0.5,
+				particle_damping = 0.15,
+				particle_gravity = -50,
+				min_distance_emit_particles = 1,
+				legacy_computing_symbols_support = true,
+			})
+		end,
 	},
 	{
 		"brenoprata10/nvim-highlight-colors",
