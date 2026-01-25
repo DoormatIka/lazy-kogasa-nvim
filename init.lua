@@ -133,19 +133,6 @@ keyset("i", "<A-Down>", ":m .+1<CR>==gi", {})
 -- terminal escape.
 keyset("t", "<Esc>", "<C-\\><C-n>")
 
--- diagnostics
-api.nvim_create_user_command("Diagnostics", function()
-	vim.diagnostic.setqflist()
-	vim.cmd("copen 5")
-end, {})
-
-api.nvim_create_autocmd("DiagnosticChanged", {
-	group = diagnostics_augroup,
-	callback = function()
-		vim.diagnostic.setqflist({ open = false })
-	end,
-})
-
 keyset("n", "<leader>ac", function()
 	vim.lsp.buf.code_action()
 end, { desc = "Apply preferred code action" })

@@ -1,8 +1,13 @@
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-local runtime_path = vim.split(package.path, ';')
+local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-require("lspconfig").lua_ls.setup {
+require("lspconfig").lua_ls.setup({
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+	end,
 	settings = {
 		Lua = {
 			runtime = {
@@ -11,7 +16,7 @@ require("lspconfig").lua_ls.setup {
 			},
 			diagnostics = {
 				globals = { "vim" },
-				disable = { "missing-fields" }
+				disable = { "missing-fields" },
 			},
 			workspace = {
 				library = {
@@ -28,4 +33,4 @@ require("lspconfig").lua_ls.setup {
 			format = { enable = false },
 		},
 	},
-}
+})
