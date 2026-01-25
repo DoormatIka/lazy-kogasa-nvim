@@ -28,17 +28,6 @@ return {
 					"markdown",
 				},
 				indent = { enable = true },
-				select = {
-					enable = true,
-					keymaps = {
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
-						["ab"] = "@block.outer",
-						["ib"] = "@block.inner",
-					},
-				},
 				auto_install = true,
 				sync_install = false,
 				highlight = {
