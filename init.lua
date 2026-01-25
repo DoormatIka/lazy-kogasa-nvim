@@ -87,18 +87,18 @@ vim.diagnostic.config({
 })
 
 -- keys
+--[[
 keyset("n", "<leader>c", function()
 	vim.cmd("tabnew")
 end, {})
-keyset("n", "<leader>.", function()
-	vim.cmd("tabn")
-end, {})
-keyset("n", "<leader>m", function()
-	vim.cmd("tabp")
-end, {})
-keyset("n", "<leader>x", function()
-	vim.cmd("tabclose")
-end, {})
+]]
+local barbar_opts = { noremap = true, silent = true }
+
+keyset("n", "<leader>m", "<Cmd>BufferPrevious<CR>", barbar_opts)
+keyset("n", "<leader>.", "<Cmd>BufferNext<CR>", barbar_opts)
+keyset("n", "<leader>x", "<Cmd>BufferClose<CR>", barbar_opts)
+keyset("n", "<leader>bd", "<Cmd>BufferOrderByDirectory<CR>", barbar_opts)
+
 keyset("n", "<leader>;", function()
 	vim.cmd("Neotree position=float")
 end, {})
@@ -112,8 +112,11 @@ keyset("n", "<leader>fw", function()
 	vim.cmd("Telescope projects")
 end, {})
 
-keyset("n", "<leader>r", vim.lsp.buf.rename, {})
-keyset("n", "<leader>d", vim.lsp.buf.definition, {})
+keyset("n", "<leader>rn", vim.lsp.buf.rename, {})
+keyset("n", "<leader>gd", function()
+	vim.cmd("vsplit")
+	vim.lsp.buf.definition()
+end, {})
 
 -- move line up and down.
 -- `==` - first = is for fixing indents, second = is to do this in the current line.

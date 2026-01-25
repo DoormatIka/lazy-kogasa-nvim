@@ -11,6 +11,15 @@ local textobjects = {
 		},
 	},
 }
+local incremental_selection = {
+	enable = true,
+	keymaps = {
+		init_selection = "gnn",
+		node_incremental = "grn",
+		node_decremental = "grm",
+		scope_incremental = "grc",
+	},
+}
 
 return {
 	{
@@ -28,11 +37,12 @@ return {
 					"markdown",
 				},
 				indent = { enable = true },
+				incremental_selection = incremental_selection,
 				auto_install = true,
 				sync_install = false,
 				highlight = {
 					enable = true,
-					disable = function(lang, buf)
+					disable = function(_, buf)
 						local max_filesize = 100 * 1024 -- 100 KB
 						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 						if ok and stats and stats.size > max_filesize then
