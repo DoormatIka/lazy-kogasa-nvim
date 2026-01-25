@@ -1,15 +1,23 @@
+local textobjects = {
+	select = {
+		enable = true,
+		keymaps = {
+			["af"] = "@function.outer",
+			["if"] = "@function.inner",
+			["ac"] = "@class.outer",
+			["ic"] = "@class.inner",
+			["ab"] = "@block.outer",
+			["ib"] = "@block.inner",
+		},
+	},
+}
+
 return {
 	{
-		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
-		build = function()
-			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
-			require("nvim-treesitter.install").prefer_git = false
-			require("nvim-treesitter.install").compilers = { "clang" }
-			require("nvim-treesitter.configs").setup {
+			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
 					"lua",
 					"vim",
@@ -17,7 +25,19 @@ return {
 					"typescript",
 					"vimdoc",
 					"luadoc",
-					"markdown"
+					"markdown",
+				},
+				indent = { enable = true },
+				select = {
+					enable = true,
+					keymaps = {
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+						["ab"] = "@block.outer",
+						["ib"] = "@block.inner",
+					},
 				},
 				auto_install = true,
 				sync_install = false,
@@ -31,8 +51,21 @@ return {
 						end
 					end,
 					additional_vim_regex_highlighting = false,
-				}
-			}
-		end
-	}
+				},
+				textobjects = textobjects,
+			})
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = function()
+			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+			ts_update()
+		end,
+		config = function()
+			require("nvim-treesitter.install").prefer_git = false
+			require("nvim-treesitter.install").compilers = { "clang" }
+		end,
+	},
 }

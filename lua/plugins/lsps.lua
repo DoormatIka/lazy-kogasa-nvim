@@ -1,11 +1,11 @@
 local trouble_keys = {
 	{
-		"<leader>xx",
+		"<leader>tt",
 		"<cmd>Trouble diagnostics toggle<cr>",
 		desc = "Diagnostics (Trouble)",
 	},
 	{
-		"<leader>xQ",
+		"<leader>tQ",
 		"<cmd>Trouble qflist toggle<cr>",
 		desc = "Quickfix List (Trouble)",
 	},
@@ -49,11 +49,8 @@ return {
 		keys = trouble_keys,
 	},
 	{
-		"artemave/workspace-diagnostics.nvim",
-	},
-	{
 		"saghen/blink.cmp", -- completion helper
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = { "rafamadriz/friendly-snippets", "artemave/workspace-diagnostics.nvim" },
 		version = "1.*",
 		opts = {
 			keymap = {
