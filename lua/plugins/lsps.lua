@@ -16,9 +16,6 @@ local mason_handler = {
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		require("lspconfig")[server_name].setup({
 			capabilities = capabilities,
-			on_attach = function(client, bufnr)
-				require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-			end,
 		})
 	end,
 	["lua_ls"] = function()

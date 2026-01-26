@@ -114,7 +114,8 @@ end, {})
 
 keyset("n", "<leader>rn", vim.lsp.buf.rename, {})
 keyset("n", "<leader>gd", function()
-	vim.cmd("vsplit")
+	vim.cmd("split")
+	vim.cmd("resize 5")
 	vim.lsp.buf.definition()
 end, {})
 
@@ -157,6 +158,21 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 			},
 			focusable = false,
 		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspProgress", {
+	callback = function(ev)
+		local is_lsp_index_finished = ev.data and ev.data.params and ev.data.params.value.kind == "end"
+		if is_lsp_index_finished then
+			local client = vim.lsp.get_client_by_id(ev.data.client_id)
+			if not client then
+				return
+			end
+
+			-- workspace diagnostics
+			require("workspace-diagnostics").populate_workspace_diagnostics(client, vim.api.nvim_get_current_buf())
+		end
 	end,
 })
 
