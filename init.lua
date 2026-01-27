@@ -11,7 +11,7 @@ set.tabstop = 4
 set.expandtab = false
 set.number = true
 set.relativenumber = true
-set.signcolumn = "number"
+set.signcolumn = "auto"
 set.clipboard = ""
 set.cursorline = true
 set.cursorlineopt = "both"
@@ -77,11 +77,25 @@ vim.diagnostic.config({
 		source = "if_many",
 	},
 	signs = {
+		--[[
 		text = {
 			[vim.diagnostic.severity.ERROR] = "\u{2718}",
 			[vim.diagnostic.severity.WARN] = "\u{25B2}",
 			[vim.diagnostic.severity.HINT] = "\u{2691}",
 			[vim.diagnostic.severity.INFO] = "\u{F129}",
+		},
+		]]
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticLineError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticLineWarn",
+			[vim.diagnostic.severity.HINT] = "DiagnosticLineInfo",
+			[vim.diagnostic.severity.INFO] = "DiagnosticLineInfo",
 		},
 	},
 })
@@ -169,10 +183,23 @@ vim.api.nvim_create_autocmd("LspProgress", {
 			if not client then
 				return
 			end
-
 			-- workspace diagnostics
 			require("workspace-diagnostics").populate_workspace_diagnostics(client, vim.api.nvim_get_current_buf())
+			require("trouble").refresh()
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("DiagnosticChanged", {
+	callback = function()
+		-- Use severity_limit if you only want Errors/Warnings
+		vim.diagnostic.setqflist({ open = false })
+	end,
+})
+vim.api.nvim_create_autocmd("User", {
+	pattern = "PersistenceSavePre",
+	callback = function()
+		require("trouble").close()
 	end,
 })
 

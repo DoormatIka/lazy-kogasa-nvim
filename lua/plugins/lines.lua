@@ -4,7 +4,6 @@ local function parent_dir_filename()
 		return ""
 	end
 
-	local cwd = vim.fn.getcwd()
 	local relativepath = vim.fn.fnamemodify(fullpath, ":.")
 	local parts = vim.split(relativepath, "/", { plain = true })
 
@@ -22,7 +21,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = function(_, opts)
+		config = function(_, _)
 			-- Bubbles config for lualine
 			-- Author: lokesh-krishna
 			-- MIT license, see LICENSE for more details.

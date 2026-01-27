@@ -1,17 +1,19 @@
 {
-    "runtime.version": "LuaJIT",
-    "runtime.special": {
-        "vim.include": "include"
-    },
-    "diagnostics.globals": ["vim"],
-    "workspace.library": [
-        "$VIMRUNTIME/lua",
-        "$VIMRUNTIME/lua/vim/lsp",
-        "${3rd}/luv/library",
-        "${3rd}/busted/library"
-    ],
-    "workspace.checkThirdParty": false,
-    "telemetry.enable": false,
-    "hint.enable": true,
-    "format.enable": false
+  "runtime.version": "LuaJIT",
+  "runtime.special": {
+    "vim.include": "include"
+  },
+  "diagnostics.globals": ["vim"],
+  "workspace.library": [
+    "$VIMRUNTIME/lua",
+    "$VIMRUNTIME/lua/vim/lsp",
+    "${3rd}/luv/library",
+    "${3rd}/busted/library"
+  ],
+  "diagnostics.workspaceEventUpdate": "OnSave",
+  "diagnostics.library": ["./lua"],
+  "workspace.checkThirdParty": false,
+  "telemetry.enable": false,
+  "hint.enable": true,
+  "format.enable": false
 }

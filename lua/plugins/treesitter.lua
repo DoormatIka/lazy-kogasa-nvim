@@ -1,4 +1,19 @@
 local textobjects = {
+	move = {
+		enable = true,
+		goto_next_start = {
+			["]f"] = "@function.inner",
+			["]c"] = "@class.inner",
+			["]b"] = "@block.inner",
+			["]s"] = "@scope",
+		},
+		goto_previous_start = {
+			["[f"] = "@function.inner",
+			["[c"] = "@class.inner",
+			["[b"] = "@block.inner",
+			["[s"] = "@scope",
+		},
+	},
 	select = {
 		enable = true,
 		keymaps = {
@@ -6,8 +21,8 @@ local textobjects = {
 			["if"] = "@function.inner",
 			["ac"] = "@class.outer",
 			["ic"] = "@class.inner",
-			["ab"] = "@block.outer",
-			["ib"] = "@block.inner",
+			["as"] = "@scope.outer",
+			["is"] = "@scope.inner",
 		},
 	},
 }

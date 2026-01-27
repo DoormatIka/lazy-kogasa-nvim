@@ -1,11 +1,11 @@
 local trouble_keys = {
 	{
 		"<leader>tt",
-		"<cmd>Trouble diagnostics toggle<cr>",
+		"<cmd>Trouble diagnostics toggle filter.buf=nil<cr>",
 		desc = "Diagnostics (Trouble)",
 	},
 	{
-		"<leader>tQ",
+		"<leader>tq",
 		"<cmd>Trouble qflist toggle<cr>",
 		desc = "Quickfix List (Trouble)",
 	},

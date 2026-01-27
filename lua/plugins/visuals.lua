@@ -4,11 +4,39 @@ local middle = "\u{1CD33}"
 
 return {
 	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require("gitsigns").setup({
+				signcolumn = false,
+				numhl = true,
+				current_line_blame = true,
+			})
+		end,
+	},
+	{
 		"vague2k/vague.nvim",
 		lazy = false,
 		priority = 1000,
 		opts = {
 			transparent = true,
+			on_highlights = function(hl, colors)
+				local function darken(hex, amount)
+					-- convert hex to RGB
+					local r = tonumber(hex:sub(2, 3), 16)
+					local g = tonumber(hex:sub(4, 5), 16)
+					local b = tonumber(hex:sub(6, 7), 16)
+					-- darken each channel by amount
+					r = math.max(0, r - amount)
+					g = math.max(0, g - amount)
+					b = math.max(0, b - amount)
+					-- return new hex
+					return string.format("#%02x%02x%02x", r, g, b)
+				end
+
+				hl.DiagnosticLineError = { bg = darken(colors.error, 170) }
+				hl.DiagnosticLineWarn = { bg = darken(colors.warning, 170) }
+				hl.DiagnosticLineInfo = { bg = darken(colors.hint, 170) }
+			end,
 		},
 	},
 	{
@@ -110,7 +138,7 @@ return {
 				exclude_filetypes = {},
 				exclude_buftypes = {},
 				-- Exclude buffer from highlighting e.g. 'exclude_buffer = function(bufnr) return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1000000 end'
-				exclude_buffer = function(bufnr) end,
+				exclude_buffer = function(_) end,
 			})
 		end,
 	},
