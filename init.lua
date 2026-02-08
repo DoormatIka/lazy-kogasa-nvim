@@ -129,7 +129,6 @@ end, {})
 keyset("n", "<leader>rn", vim.lsp.buf.rename, {})
 keyset("n", "<leader>gd", function()
 	vim.cmd("split")
-	vim.cmd("resize 5")
 	vim.lsp.buf.definition()
 end, {})
 
@@ -151,7 +150,7 @@ keyset("i", "<A-Down>", ":m .+1<CR>==gi", {})
 -- terminal escape.
 keyset("t", "<Esc>", "<C-\\><C-n>")
 
-keyset("n", "<leader>ac", function()
+keyset("n", "<leader>ca", function()
 	vim.lsp.buf.code_action()
 end, { desc = "Apply preferred code action" })
 keyset("n", "K", function()
