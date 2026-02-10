@@ -1,8 +1,7 @@
-local lspconfig = require("lspconfig")
 local util = require("lspconfig.util")
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-lspconfig.basedpyright.setup({
+vim.lsp.config("basedpyright", {
 	capabilities = capabilities,
 	root_dir = util.root_pattern("pyproject.toml", ".git"),
 	filetypes = {

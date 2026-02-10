@@ -36,6 +36,9 @@ local mason_handler = {
 	["basedpyright"] = function()
 		require("lsp.basedpyright")
 	end,
+	["cssls"] = function()
+		require("lsp.cssls")
+	end,
 }
 
 return {
@@ -105,10 +108,14 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim", -- nvim-lspconfig to mason between layer
 		lazy = false,
-		opts = {
-			ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright" },
-			handlers = mason_handler,
-		},
+		config = function(_, _)
+			local mlsp = require("mason-lspconfig")
+
+			mlsp.setup({
+				ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright" },
+				handlers = mason_handler,
+			})
+		end,
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
 			"neovim/nvim-lspconfig",

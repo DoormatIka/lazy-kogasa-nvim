@@ -1,5 +1,6 @@
 local capabilities = require("blink.cmp").get_lsp_capabilities()
-require("lspconfig").emmet_ls.setup({
+
+vim.lsp.config("emmet_ls", {
 	capabilities = capabilities,
 	filetypes = {
 		"javascriptreact",

@@ -77,14 +77,6 @@ vim.diagnostic.config({
 		source = "if_many",
 	},
 	signs = {
-		--[[
-		text = {
-			[vim.diagnostic.severity.ERROR] = "\u{2718}",
-			[vim.diagnostic.severity.WARN] = "\u{25B2}",
-			[vim.diagnostic.severity.HINT] = "\u{2691}",
-			[vim.diagnostic.severity.INFO] = "\u{F129}",
-		},
-		]]
 		text = {
 			[vim.diagnostic.severity.ERROR] = "",
 			[vim.diagnostic.severity.WARN] = "",

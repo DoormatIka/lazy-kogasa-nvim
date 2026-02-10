@@ -3,7 +3,8 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-require("lspconfig").lua_ls.setup({
+
+vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
 		require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
