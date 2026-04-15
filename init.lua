@@ -119,10 +119,8 @@ keyset("n", "<leader>fw", function()
 end, {})
 
 keyset("n", "<leader>rn", vim.lsp.buf.rename, {})
-keyset("n", "<leader>gd", function()
-	vim.cmd("split")
-	vim.lsp.buf.definition()
-end, {})
+keyset("n", "<leader>gd", "<cmd>Telescope lsp_definitions<cr>")
+keyset("n", "<leader>gr", "<cmd>Telescope lsp_references<cr>")
 
 -- move line up and down.
 -- `==` - first = is for fixing indents, second = is to do this in the current line.
