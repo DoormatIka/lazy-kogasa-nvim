@@ -112,7 +112,7 @@ return {
 			local mlsp = require("mason-lspconfig")
 
 			mlsp.setup({
-				ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright" },
+				ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright", "codelldb" },
 				handlers = mason_handler,
 			})
 		end,
