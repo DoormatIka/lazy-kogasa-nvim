@@ -18,6 +18,7 @@ return {
 		priority = 1000,
 		opts = {
 			transparent = true,
+			--[[
 			on_highlights = function(hl, colors)
 				local function darken(hex, amount)
 					-- convert hex to RGB
@@ -36,6 +37,7 @@ return {
 				hl.DiagnosticLineWarn = { bg = darken(colors.warning, 170) }
 				hl.DiagnosticLineInfo = { bg = darken(colors.hint, 170) }
 			end,
+			--]]
 		},
 	},
 	{
