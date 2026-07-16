@@ -113,6 +113,9 @@ return {
 
 			mlsp.setup({
 				ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright", "codelldb" },
+				automatic_enable = {
+					exclude = { "rust_analyzer" },
+				},
 				handlers = mason_handler,
 			})
 		end,
