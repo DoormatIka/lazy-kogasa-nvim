@@ -39,6 +39,12 @@ local mason_handler = {
 	["cssls"] = function()
 		require("lsp.cssls")
 	end,
+	["qmlls"] = function()
+		require("lspconfig").qmlls.setup({
+			cmd = { vim.fn.executable("qmlls6") == 1 and "qmlls6" or "qmlls", "--build-dir", "/path/to/your/build" },
+			filetypes = { "qml", "qmljs" },
+		})
+	end,
 }
 
 return {
@@ -112,7 +118,7 @@ return {
 			local mlsp = require("mason-lspconfig")
 
 			mlsp.setup({
-				ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright", "codelldb" },
+				ensure_installed = { "lua_ls", "ts_ls", "emmet_ls", "basedpyright", "qmlls" },
 				automatic_enable = {
 					exclude = { "rust_analyzer" },
 				},

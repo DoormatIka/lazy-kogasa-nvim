@@ -12,7 +12,7 @@ set.expandtab = false
 set.number = true
 set.relativenumber = true
 set.signcolumn = "auto"
-set.clipboard = ""
+set.clipboard = "unnamedplus"
 set.cursorline = true
 set.cursorlineopt = "both"
 set.scrolloff = 10
@@ -38,18 +38,6 @@ vim.wo.linebreak = false
 
 global.mapleader = ","
 set.pyxversion = 3
-vim.g.clipboard = {
-	name = "xclip",
-	copy = {
-		["+"] = "xclip -selection clipboard",
-		["*"] = "xclip -selection primary",
-	},
-	paste = {
-		["+"] = "xclip -selection clipboard -o",
-		["*"] = "xclip -selection primary -o",
-	},
-	cache_enabled = 0,
-}
 
 -- CLEAN CLRF NEWLINES WTF GIT :sob:
 vim.cmd([[command! CleanCLRF :%s/\r$//g]])

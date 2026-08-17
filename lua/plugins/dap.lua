@@ -86,7 +86,7 @@ return { -- config from the article: https://tamerlan.dev/a-guide-to-debugging-a
 			require("dap").continue()
 		end, "Start or continue the debugger.")
 		map_dap("t", function()
-			require("dap").continue()
+			require("dap").toggle_breakpoint()
 		end, "Toggle Breakpoint")
 		map_dap("i", function()
 			require("dap").step_into()

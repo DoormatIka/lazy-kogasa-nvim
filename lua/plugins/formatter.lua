@@ -19,6 +19,7 @@ return {
 				lua = { "stylua" },
 				cs = { "csharpier" },
 				rust = { "rustfmt" },
+				qml = { "qmlformat" }
 			},
 			format_on_save = {
 				timeout_ms = 5000,
